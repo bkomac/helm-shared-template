@@ -1,0 +1,4 @@
+1. Application type: {{ .Values.appType }}
+2. Release name: {{ .Release.Name }}
+3. Service enabled: {{ .Values.service.enabled }}
+4. Ingress enabled: {{ .Values.ingress.enabled }}

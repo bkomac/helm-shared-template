@@ -1,0 +1,54 @@
+appType: web-service
+
+nameOverride: ""
+fullnameOverride: ""
+
+deployment:
+  enabled: true
+  replicaCount: 1
+
+image:
+  repository: nginxdemos/hello
+  tag: plain-text
+  pullPolicy: IfNotPresent
+
+container:
+  port: 80
+
+service:
+  enabled: true
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: app.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+probes:
+  liveness:
+    enabled: true
+    path: /
+  readiness:
+    enabled: true
+    path: /
+
+env: []
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
+
+labels: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
