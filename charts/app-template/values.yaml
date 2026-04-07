@@ -3,7 +3,7 @@ appType: web-service
 nameOverride: ""
 fullnameOverride: ""
 appName: ""
-# If `nameOverride` and `appName` are empty, the chart uses the Helm release name.
+# If `nameOverride` and `appName` are empty, the chart uses the chart or dependency alias name.
 
 deployment:
   enabled: true
