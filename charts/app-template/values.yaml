@@ -42,10 +42,19 @@ probes:
 configMap:
   enabled: false
   data: {}
+  # Example:
+  # data:
+  #   APP_MESSAGE: "hello-from-configmap"
+  #   FEATURE_FLAG: "true"
+  #   LOG_LEVEL: "debug"
 
 secret:
   enabled: false
   stringData: {}
+  # Example:
+  # stringData:
+  #   API_TOKEN: "change-me"
+  #   DB_PASSWORD: "change-me"
 
 extraEnvFrom: []
 
