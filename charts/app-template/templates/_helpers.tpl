@@ -1,5 +1,5 @@
 {{- define "app-template.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- coalesce .Values.nameOverride .Values.appName .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{- define "app-template.fullname" -}}
