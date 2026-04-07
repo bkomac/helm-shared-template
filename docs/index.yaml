@@ -3,9 +3,9 @@ entries:
   app-template:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-04-07T19:13:17.365078806Z"
+    created: "2026-04-07T19:56:27.224212466Z"
     description: Versioned reusable Helm chart for platform-managed applications
-    digest: e29b515420f839a2a3c9a4c30513387d0b624719a207831a06a8f21646af8828
+    digest: 4d2b36f2879323b629d7a3eafbb2027e2e8dd8c3db7404b24bc590de12f9eb7a
     keywords:
     - template
     - platform
@@ -15,4 +15,4 @@ entries:
     urls:
     - https://bkomac.github.io/helm-shared-template/app-template-1.0.0.tgz
     version: 1.0.0
-generated: "2026-04-07T19:13:17.36459339Z"
+generated: "2026-04-07T19:56:27.223205625Z"
