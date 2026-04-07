@@ -39,6 +39,16 @@ probes:
     enabled: true
     path: /
 
+configMap:
+  enabled: false
+  data: {}
+
+secret:
+  enabled: false
+  stringData: {}
+
+extraEnvFrom: []
+
 env: []
 resources:
   requests:

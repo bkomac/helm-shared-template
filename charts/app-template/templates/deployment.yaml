@@ -26,6 +26,20 @@ spec:
             - name: http
               containerPort: {{ .Values.container.port }}
               protocol: TCP
+          {{- if or .Values.configMap.enabled .Values.secret.enabled .Values.extraEnvFrom }}
+          envFrom:
+            {{- if .Values.configMap.enabled }}
+            - configMapRef:
+                name: {{ include "app-template.fullname" . }}
+            {{- end }}
+            {{- if .Values.secret.enabled }}
+            - secretRef:
+                name: {{ include "app-template.fullname" . }}
+            {{- end }}
+            {{- with .Values.extraEnvFrom }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          {{- end }}
           {{- with .Values.env }}
           env:
             {{- toYaml . | nindent 12 }}
