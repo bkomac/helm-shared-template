@@ -1,0 +1,61 @@
+name: Publish Helm chart repo
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'charts/**'
+      - '.github/workflows/publish-chart.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+
+      - name: Package charts and build index
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p docs
+          rm -f docs/*.tgz
+
+          for chart in ./charts/*; do
+            if [ -d "$chart" ]; then
+              helm lint "$chart"
+              helm package "$chart" --destination ./docs
+            fi
+          done
+
+          if [ -f ./docs/index.yaml ]; then
+            helm repo index ./docs \
+              --url https://bkomac.github.io/helm-shared-template \
+              --merge ./docs/index.yaml
+          else
+            helm repo index ./docs \
+              --url https://bkomac.github.io/helm-shared-template
+          fi
+
+      - name: Commit published chart artifacts
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+
+          if git diff --cached --quiet; then
+            echo "No chart changes to publish."
+          else
+            git commit -m "Publish Helm chart repo"
+            git push
+          fi
