@@ -28,7 +28,6 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p docs
-          rm -f docs/*.tgz
 
           for chart in ./charts/*; do
             if [ -d "$chart" ]; then
